@@ -94,7 +94,7 @@ export const Converter = ({ currencies }) => {
             value={currenciesVals.fromAmount}
             name="fromAmount"
             onChange={(e) =>
-              handleFromAmount(e.target.value.replace(/[^0-9\.\,]/g, ''))
+              handleFromAmount(e.target.value.replace(/[^0-9.,]/g, ''))
             }
           />
         </Form.Group>
@@ -105,7 +105,7 @@ export const Converter = ({ currencies }) => {
             value={currenciesVals.toAmount}
             name="toAmount"
             onChange={(e) =>
-              handleToAmount(e.target.value.replace(/[^0-9\.\,]/g, ''))
+              handleToAmount(e.target.value.replace(/[^0-9.,]/g, ''))
             }
           />
         </Form.Group>
