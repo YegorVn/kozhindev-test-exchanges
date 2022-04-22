@@ -5,20 +5,13 @@ import { convert } from '../utils/convert'
 
 export const Converter = ({ currencies }) => {
   const [currenciesVals, setCurrenciesVals] = useState({
-    fromAmount: localStorage.getItem('fromAmount')
-      ? localStorage.getItem('fromAmount')
-      : '',
-    toAmount: localStorage.getItem('toAmount')
-      ? localStorage.getItem('toAmount')
-      : '',
-    fromPrice: localStorage.getItem('fromPrice')
-      ? localStorage.getItem('fromPrice')
-      : currencies[0].price,
-    toPrice: localStorage.getItem('toPrice')
-      ? localStorage.getItem('toPrice')
-      : currencies[0].price
+    fromAmount: 0,
+    toAmount: 0,
+    fromPrice: currencies[0].price,
+    toPrice: currencies[0].price
   })
 
+  /// отдельный обработчик для каждого инпута
   const handleToAmount = (val) => {
     const convertedValue = convert(
       val,
@@ -33,15 +26,13 @@ export const Converter = ({ currencies }) => {
       toAmount: val,
       fromAmount: convertedValue
     })
-    localStorage.setItem('toAmount', val)
-    localStorage.setItem('fromAmount', convertedValue)
   }
 
   const handleToPrice = (val) => {
     const convertedValue = convert(
       currenciesVals.fromAmount,
-      currenciesVals.fromPrice,
       val,
+      currenciesVals.fromPrice,
       2
     )
     setCurrenciesVals({
@@ -49,14 +40,13 @@ export const Converter = ({ currencies }) => {
       toPrice: val,
       toAmount: convertedValue
     })
-    localStorage.setItem('toPrice', val)
   }
 
   const handleFromPrice = (val) => {
     const convertedValue = convert(
       currenciesVals.fromAmount,
-      val,
       currenciesVals.toPrice,
+      val,
       2
     )
     setCurrenciesVals({
@@ -64,7 +54,6 @@ export const Converter = ({ currencies }) => {
       fromPrice: val,
       toAmount: convertedValue
     })
-    localStorage.setItem('fromPrice', val)
   }
 
   const handleFromAmount = (val) => {
@@ -80,13 +69,11 @@ export const Converter = ({ currencies }) => {
       fromAmount: val,
       toAmount: convertedValue
     })
-    localStorage.setItem('toAmount', convertedValue)
-    localStorage.setItem('fromAmount', val)
   }
 
   return (
-    <div className="d-flex mt-4 mb-5">
-      <div className="d-flex flex-column col-2">
+    <div className="d-flex mt-4 mb-5 col-6 col-sm-9 col-md-7 col-lg-5 col-xl-4">
+      <div className="d-flex flex-column col-5">
         <Form.Group className="mb-3">
           <Form.Control
             id=""
@@ -110,7 +97,8 @@ export const Converter = ({ currencies }) => {
           />
         </Form.Group>
       </div>
-      <div className="d-flex flex-column col-3 ms-5">
+      {/* <div className="d-flex flex-column ms-3 col-6 col-sm-5 col-md-4 col-xl-3"> */}
+      <div className="d-flex flex-column ms-3">
         <Form.Group className="mb-3">
           <Form.Select
             id=""

@@ -2,15 +2,15 @@ import React, { useEffect } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import { CustomTable } from '../components/CustomTable'
 import { Converter } from '../components/Converter'
-// import CurrenciesAction from '../redux/actions/CurrenciesAction'
+import CurrenciesAction from '../redux/actions/CurrenciesAction'
 import { useSelector } from 'react-redux'
+import { currenciesForRequest } from '../constants'
 
 export default function MainView () {
   const currencies = useSelector((state) => state.currencies).currencies
 
   useEffect(() => {
-    // CurrenciesAction.find()
-    // console.log(currencies)
+    CurrenciesAction.find(currenciesForRequest)
   }, [])
 
   if (currencies !== undefined && currencies !== [] && currencies.length > 0) {

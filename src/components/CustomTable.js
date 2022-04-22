@@ -32,14 +32,14 @@ export const CustomTable = ({ defaultCurrencies }) => {
 
   return (
     <>
-      <Form.Group className="mt-4 mb-4">
+      <Form.Group className="mt-4 mb-4" responsive='sm' >
         <Form.Control
           id=""
           placeholder=""
           onChange={(e) => handleSearch(e.target.value)}
         />
       </Form.Group>
-      <Table className="" striped bordered hover>
+      <Table className="custom-table col-10" size="sm" responsive="xl" striped bordered hover>
         <thead>
           <tr>
             <th>Строка</th>

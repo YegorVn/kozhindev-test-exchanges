@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Navbar, Container } from 'react-bootstrap'
+import { currenciesForRequest } from '../constants'
 
 import CurrenciesAction from '../redux/actions/CurrenciesAction'
 
@@ -7,7 +8,7 @@ export const Header = () => {
   const [lastUpdate, setLastUpdate] = useState((new Date()).toLocaleString())
 
   const update = () => {
-    CurrenciesAction.find()
+    CurrenciesAction.find(currenciesForRequest)
     setLastUpdate((new Date()).toLocaleString())
   }
 
