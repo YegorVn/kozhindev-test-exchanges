@@ -1,3 +1,4 @@
+import { transformRequestCurrencies } from '../../utils/transformRequestCurrencies'
 const initialState = {
   currencies: []
 }
@@ -5,7 +6,7 @@ const initialState = {
 export default function CurrenciesReducer (state = initialState, action) {
   switch (action.type) {
     case 'CURRENCIES_INDEX':
-      return { ...state, currencies: action.payload }
+      return { ...state, currencies: transformRequestCurrencies(action.payload) }
     default:
       return state
   }

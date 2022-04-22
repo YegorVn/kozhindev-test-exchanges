@@ -1,7 +1,7 @@
-import { findCurrName } from "./findCurrName";
+import { findCurrName } from './findCurrName'
 export const transformRequestCurrencies = (payload) => {
-  const currencies = payload.quotes  
+  const currencies = payload.quotes
   return Object.keys(currencies).map(
-        (quote) => (quote = { price: currencies[quote], name: findCurrName(quote), code: quote.replace('USD', "")})
-      );
+    (quote) => (quote = { price: currencies[quote], name: findCurrName(quote), code: quote.replace('USD', '') })
+  )
 }
