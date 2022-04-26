@@ -1,7 +1,7 @@
 import store from '../../index'
 import axios from 'axios'
 const DEFAULT_URL =
-  'http://api.currencylayer.com/live?access_key=d32a5d184881bca99bf74d6ac67a5f34&currencies='
+  'http://api.currencylayer.com/live?access_key=ff98a9850ca00cb291c281a5cfbc69fb&currencies='
 
 /// Получаем данные через api
 export default class CurrenciesAction {

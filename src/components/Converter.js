@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 
 import { convert } from '../utils/convert'
+import { checkExistence } from '../utils/checkExistence'
 
 export const Converter = ({ currencies }) => {
   const [currenciesVals, setCurrenciesVals] = useState({
-    fromAmount: 0,
-    toAmount: 0,
-    fromPrice: currencies[0].price,
-    toPrice: currencies[0].price
+    fromAmount: checkExistence(localStorage.getItem('fromAmount')) ? localStorage.getItem('fromAmount') : 0,
+    toAmount: checkExistence(localStorage.getItem('toAmount')) ? localStorage.getItem('toAmount') : 0,
+    fromPrice: checkExistence(localStorage.getItem('fromPrice')) ? localStorage.getItem('fromPrice') : currencies[0].price,
+    toPrice: checkExistence(localStorage.getItem('toPrice')) ? localStorage.getItem('toPrice') : currencies[0].price
   })
 
   /// отдельный обработчик для каждого инпута
@@ -26,34 +27,8 @@ export const Converter = ({ currencies }) => {
       toAmount: val,
       fromAmount: convertedValue
     })
-  }
-
-  const handleToPrice = (val) => {
-    const convertedValue = convert(
-      currenciesVals.fromAmount,
-      val,
-      currenciesVals.fromPrice,
-      2
-    )
-    setCurrenciesVals({
-      ...currenciesVals,
-      toPrice: val,
-      toAmount: convertedValue
-    })
-  }
-
-  const handleFromPrice = (val) => {
-    const convertedValue = convert(
-      currenciesVals.fromAmount,
-      currenciesVals.toPrice,
-      val,
-      2
-    )
-    setCurrenciesVals({
-      ...currenciesVals,
-      fromPrice: val,
-      toAmount: convertedValue
-    })
+    localStorage.setItem('toAmount', val)
+    localStorage.setItem('fromAmount', convertedValue)
   }
 
   const handleFromAmount = (val) => {
@@ -69,6 +44,40 @@ export const Converter = ({ currencies }) => {
       fromAmount: val,
       toAmount: convertedValue
     })
+    localStorage.setItem('fromAmount', val)
+    localStorage.setItem('toAmount', convertedValue)
+  }
+
+  const handleToPrice = (val) => {
+    const convertedValue = convert(
+      currenciesVals.fromAmount,
+      val,
+      currenciesVals.fromPrice,
+      2
+    )
+    setCurrenciesVals({
+      ...currenciesVals,
+      toPrice: val,
+      toAmount: convertedValue
+    })
+    localStorage.setItem('toPrice', val)
+    localStorage.setItem('toAmount', convertedValue)
+  }
+
+  const handleFromPrice = (val) => {
+    const convertedValue = convert(
+      currenciesVals.fromAmount,
+      currenciesVals.toPrice,
+      val,
+      2
+    )
+    setCurrenciesVals({
+      ...currenciesVals,
+      fromPrice: val,
+      toAmount: convertedValue
+    })
+    localStorage.setItem('fromPrice', val)
+    localStorage.setItem('toAmount', convertedValue)
   }
 
   return (
